@@ -7,6 +7,7 @@ namespace udp_receiver {
 static const char *TAG = "udp_receiver.component";
 
 void UdpReceiver::setup() {
+  this->port_ = 12345;
   // Init UDP lazily
   if (this->socket_ == nullptr) {
     this->socket_ = socket::socket_ip(SOCK_DGRAM, IPPROTO_IP);
