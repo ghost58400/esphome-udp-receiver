@@ -54,7 +54,7 @@ void UdpReceiver::loop() {
 
     // Process the received string as needed
     ESP_LOGI(TAG, "UDP frame received :  %s", receivedString.c_str());
-    id(udp_receiver_text) = receivedString;
+    id(udp_receiver_text).publish_state(receivedString);
   }
 }
 
