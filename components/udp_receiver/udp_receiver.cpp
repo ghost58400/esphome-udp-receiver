@@ -47,16 +47,13 @@ void UdpReceiver::loop() {
   if (len == -1) {
     return;
   }
-  payload.resize(len);
-  memmove(&payload[0], buf, len);
-  
   if (len > 0) {
     // Assuming received data is null-terminated string
     std::string receivedString(reinterpret_cast<char*>(buf), len);
 
     // Process the received string as needed
-    ESP_LOGW(TAG, "UDP frame received :  %s", receivedString);
-}
+    ESP_LOGW(TAG, "UDP frame received :  %s", receivedString.c_str());
+  }
 
 }
 
