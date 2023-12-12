@@ -1,6 +1,6 @@
 ```yaml
 # example configuration:
 
-udp_receiver:
-  id: udp_receiver_1
+text_sensor:
+  - platform: udp_receiver
 ```
