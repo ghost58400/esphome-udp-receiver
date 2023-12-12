@@ -1,5 +1,6 @@
 #pragma once
 
+#include "esphome/components/socket/socket.h"
 #include "esphome/core/component.h"
 
 namespace esphome {
@@ -10,6 +11,10 @@ class UdpReceiver : public Component {
   void setup() override;
   void loop() override;
   void dump_config() override;
+
+ protected:
+  uint16_t port_{0};
+  std::unique_ptr<socket::Socket> socket_;
 };
 
 
