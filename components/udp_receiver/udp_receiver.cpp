@@ -4,7 +4,7 @@
 namespace esphome {
 namespace udp_receiver {
 
-static const char *TAG = "udp_receiver.component";
+static const char *TAG = "udp_receiver";
 
 void UdpReceiver::setup() {
   this->port_ = 12345;
@@ -42,7 +42,7 @@ void UdpReceiver::setup() {
 }
 
 void UdpReceiver::loop() {
-  uint8_t buf[1460];
+  uint8_t buf[1024];
 
   ssize_t len = this->socket_->read(buf, sizeof(buf));
   if (len == -1) {
@@ -53,13 +53,13 @@ void UdpReceiver::loop() {
     std::string receivedString(reinterpret_cast<char*>(buf), len);
 
     // Process the received string as needed
-    ESP_LOGW(TAG, "UDP frame received :  %s", receivedString.c_str());
+    ESP_LOGI(TAG, "UDP frame received :  %s", receivedString.c_str());
+    id(udp_receiver_text) = receivedString;
   }
-
 }
 
 void UdpReceiver::dump_config(){
-    ESP_LOGCONFIG(TAG, "Empty component");
+    ESP_LOGCONFIG(TAG, "UDP Receiver component");
 }
 
 
