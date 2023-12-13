@@ -7,7 +7,6 @@ namespace udp_receiver {
 static const char *TAG = "udp_receiver";
 
 void UdpReceiver::setup() {
-  this->port_ = 12345; // TODO ajouter config
   // Init UDP lazily
   this->socket_ = socket::socket_ip(SOCK_DGRAM, IPPROTO_IP);
 
@@ -61,7 +60,8 @@ void UdpReceiver::loop() {
 }
 
 void UdpReceiver::dump_config(){
-    ESP_LOGCONFIG(TAG, "UDP Receiver component");
+    LOG_TEXT_SENSOR("", "UDP Receiver Text Sensor", this);
+    ESP_LOGCONFIG(TAG, "  Topic: %u", this->port_);
 }
 
 

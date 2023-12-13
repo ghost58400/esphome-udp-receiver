@@ -12,6 +12,7 @@ class UdpReceiver : public text_sensor::TextSensor, public Component {
   void setup() override;
   void loop() override;
   void dump_config() override;
+  void set_port(uint16_t port) { this->port_ = port; }
   float get_setup_priority() const override { return setup_priority::AFTER_WIFI; }
 
  protected:
