@@ -61,7 +61,7 @@ void UdpReceiver::loop() {
 
 void UdpReceiver::dump_config(){
     LOG_TEXT_SENSOR("", "UDP Receiver Text Sensor", this);
-    ESP_LOGCONFIG(TAG, "  Topic: %u", this->port_);
+    ESP_LOGCONFIG(TAG, "  Port: %u", this->port_);
 }
 
 
