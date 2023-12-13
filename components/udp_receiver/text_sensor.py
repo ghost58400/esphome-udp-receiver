@@ -10,7 +10,7 @@ UdpReceiver = udp_receiver_ns.class_('UdpReceiver', text_sensor.TextSensor, cg.C
 
 CONFIG_SCHEMA = text_sensor.text_sensor_schema().extend({
     cv.GenerateID(): cv.declare_id(UdpReceiver),
-    cv.Optional(CONF_PORT, default=12345): cv.port,
+    cv.Required(CONF_PORT): cv.port,
 }).extend(cv.COMPONENT_SCHEMA)
 
 
