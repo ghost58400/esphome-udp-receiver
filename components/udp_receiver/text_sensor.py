@@ -17,4 +17,4 @@ CONFIG_SCHEMA = text_sensor.text_sensor_schema().extend({
 async def to_code(config):
     var = await text_sensor.new_text_sensor(config)
     await cg.register_component(var, config)
-    await cg.add(var.set_port(config[CONF_PORT]))
+    cg.add(var.set_port(config[CONF_PORT]))
