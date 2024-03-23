@@ -79,6 +79,7 @@ void UdpReceiver::loop() {
   uint8_t buf[1024];
 
   #ifdef USE_ARDUINO
+  this->udp_->parsePacket()
   ssize_t len = this->udp_->read(buf, sizeof(buf));
   #endif  // USE_ARDUINO
   #ifndef USE_ARDUINO
