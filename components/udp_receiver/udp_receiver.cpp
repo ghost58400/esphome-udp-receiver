@@ -7,6 +7,19 @@ namespace udp_receiver {
 static const char *TAG = "udp_receiver";
 
 void UdpReceiver::setup() {
+
+  #ifdef USE_ARDUINO
+  if (!udp_) {
+    udp_ = make_unique<WiFiUDP>();
+
+    if (!udp_->begin(this->port_)) {
+      ESP_LOGW(TAG, "Cannot bind to %d.", this->port_);
+      return;
+    }
+  }
+  #endif  // USE_ARDUINO
+
+  #ifndef USE_ARDUINO
   // Init UDP lazily
   this->socket_ = socket::socket_ip(SOCK_DGRAM, IPPROTO_IP);
   if (socket_ == nullptr) {
@@ -44,13 +57,19 @@ void UdpReceiver::setup() {
     this->mark_failed();
     return;
   }
-
+  #endif  // not USE_ARDUINO
 }
 
 void UdpReceiver::loop() {
   uint8_t buf[1024];
 
+  #ifdef USE_ARDUINO
+  ssize_t len = this->udp_->read(buf, sizeof(buf));
+  #endif  // USE_ARDUINO
+  #ifndef USE_ARDUINO
   ssize_t len = this->socket_->read(buf, sizeof(buf));
+  #endif  // not USE_ARDUINO
+  
   if (len == -1) {
     return;
   }
