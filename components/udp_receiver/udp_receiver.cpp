@@ -54,7 +54,7 @@ void UdpReceiver::loop() {
   if (len == -1) {
     return;
   }
-  ESP_LOGD(TAG, "UDP frame received, converting to str...");
+  ESP_LOGV(TAG, "UDP frame received, converting to str...");
   if (len > 0) {
     // Assuming received data is null-terminated string
     std::string receivedString(reinterpret_cast<char*>(buf), len);
