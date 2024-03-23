@@ -21,10 +21,12 @@ class UdpReceiver : public text_sensor::TextSensor, public Component {
 
  protected:
   uint16_t port_{0};
-  std::unique_ptr<socket::Socket> socket_;
   #ifdef USE_ARDUINO
   std::unique_ptr<UDP> udp_;
   #endif  // USE_ARDUINO
+  #ifndef USE_ARDUINO
+  std::unique_ptr<socket::Socket> socket_;
+  #endif  // not USE_ARDUINO
 };
 
 
