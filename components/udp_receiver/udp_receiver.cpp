@@ -9,6 +9,11 @@ static const char *TAG = "udp_receiver";
 void UdpReceiver::setup() {
   // Init UDP lazily
   this->socket_ = socket::socket_ip(SOCK_DGRAM, IPPROTO_IP);
+  if (socket_ == nullptr) {
+    ESP_LOGW(TAG, "Could not create socket");
+    this->mark_failed();
+    return;
+  }
 
   int enable = 1;
   int err = this->socket_->setsockopt(SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int));
