@@ -1,6 +1,21 @@
 #include "esphome/core/log.h"
 #include "udp_receiver.h"
 
+#ifdef USE_ARDUINO
+#ifdef USE_ESP32
+#include <WiFi.h>
+#endif
+
+#ifdef USE_ESP8266
+#include <ESP8266WiFi.h>
+#include <WiFiUdp.h>
+#endif
+
+#ifdef USE_BK72XX
+#include <WiFiUdp.h>
+#endif
+#endif  // USE_ARDUINO
+
 namespace esphome {
 namespace udp_receiver {
 
